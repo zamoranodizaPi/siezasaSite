@@ -25,96 +25,96 @@ const fadeUp = {
 const sectionBackgrounds = {
   hero: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?mine,industrial",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Mining", es: "Minería" },
       title: { en: "Mining operations and heavy-duty field power", es: "Minas y energía para operación pesada" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?electrical-substation,power",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Substations", es: "Subestaciones" },
       title: { en: "Substations and critical power distribution", es: "Subestaciones y distribución crítica" },
     },
   ],
   about: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-team,engineering",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Field Engineering", es: "Ingeniería en campo" },
       title: { en: "Engineering teams focused on industrial continuity", es: "Equipos enfocados en continuidad industrial" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-maintenance,electrical",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Maintenance", es: "Mantenimiento" },
       title: { en: "Technical response where the operation cannot stop", es: "Respuesta técnica donde la operación no se detiene" },
     },
   ],
   capabilities: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?control-panel,electrical",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Control Panels", es: "Tableros de control" },
       title: { en: "Industrial panels built for distribution and protection", es: "Tableros para distribución, control y protección" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-automation,panel",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Automation", es: "Automatización" },
       title: { en: "Integration, wiring, and advanced control architecture", es: "Integración, cableado y control avanzado" },
     },
   ],
   sectors: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?mine,quarry",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Industrial Sites", es: "Sitios industriales" },
       title: { en: "Mining, energy, and high-demand industrial facilities", es: "Minería, energía e instalaciones de alta exigencia" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-plant,power",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Critical Facilities", es: "Instalaciones críticas" },
       title: { en: "Electrical infrastructure for demanding operating environments", es: "Infraestructura eléctrica para operación exigente" },
     },
   ],
   strength: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?electrical-testing,technician",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Testing", es: "Pruebas" },
       title: { en: "Testing and diagnostics for real field conditions", es: "Pruebas y diagnóstico en condiciones reales" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?analytics,industrial-dashboard",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Analytics", es: "Analítica" },
       title: { en: "Electrical insight backed by technical analysis", es: "Visibilidad eléctrica respaldada por análisis técnico" },
     },
   ],
   projects: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?electrical-room,industrial",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Execution", es: "Ejecución" },
       title: { en: "Installed systems and delivered field solutions", es: "Sistemas instalados y soluciones entregadas" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?substation,engineering",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Power Systems", es: "Sistemas de potencia" },
       title: { en: "Project experience aligned with critical infrastructure", es: "Experiencia alineada con infraestructura crítica" },
     },
   ],
   contact: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-office,control-room",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Coordination", es: "Coordinación" },
       title: { en: "Commercial follow-up and technical coordination", es: "Seguimiento comercial y coordinación técnica" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?electrical-engineer,plant",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Support", es: "Soporte" },
       title: { en: "Direct contact for industrial electrical requirements", es: "Contacto directo para requerimientos eléctricos" },
     },
   ],
   gallery: [
     {
-      image: "https://source.unsplash.com/featured/1600x900/?industrial-control,monitoring",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Visual Portfolio", es: "Portafolio visual" },
       title: { en: "Visual references for field work and industrial systems", es: "Referencias visuales de campo y sistemas industriales" },
     },
     {
-      image: "https://source.unsplash.com/featured/1600x900/?power-plant,industrial",
+      image: "/hero/hero-mining.jpg",
       label: { en: "Service Evidence", es: "Evidencia de servicios" },
       title: { en: "Portfolio-ready imagery while local assets are pending", es: "Imágenes de muestra mientras llegan activos reales" },
     },
