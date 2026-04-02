@@ -428,14 +428,6 @@ export default function App() {
     setSceneIndex(0);
   }, [activeSection]);
 
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setSceneIndex((current) => (current + 1) % activeSectionScenes.length);
-    }, 5500);
-
-    return () => window.clearInterval(intervalId);
-  }, [activeSectionScenes.length]);
-
   const addFiles = (files) => {
     const next = Array.from(files || [])
       .filter((file) => file.type.startsWith("image/"))
@@ -449,8 +441,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#04070b] text-white">
-      <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden text-white">
+      <div className="fixed inset-0 z-0 overflow-hidden">
         <motion.div
           key={`${activeSection}-${sceneIndex}`}
           initial={{ opacity: 0 }}
@@ -465,6 +457,7 @@ export default function App() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.06]" />
       </div>
 
+      <div className="relative z-10">
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#04070b]/72 backdrop-blur-xl">
         <div className="mx-auto max-w-[92rem] px-6 py-4 lg:px-8 xl:px-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -651,25 +644,6 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="grid gap-4 self-end"
             >
-              <div className="grid gap-3 sm:grid-cols-2">
-                {activeSectionScenes.map((scene, index) => (
-                  <button
-                    key={`${activeSection}-${scene.label.en}`}
-                    type="button"
-                    onClick={() => setSceneIndex(index)}
-                    className={`rounded-[1.5rem] border px-4 py-3 text-left backdrop-blur-md transition ${
-                      index === sceneIndex
-                        ? "border-sky-300/60 bg-sky-400/16 shadow-[0_0_36px_rgba(56,189,248,0.16)]"
-                        : "border-white/10 bg-black/30 hover:border-white/25 hover:bg-black/40"
-                    }`}
-                  >
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-200">
-                      {scene.label[language]}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-slate-200">{scene.title[language]}</p>
-                  </button>
-                ))}
-              </div>
               {t.highlights.map(([title, text]) => (
                 <div key={title} className="rounded-[1.8rem] border border-white/10 bg-black/35 p-5 backdrop-blur-md">
                   <p className="text-sm font-semibold text-white">{title}</p>
@@ -921,6 +895,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
