@@ -22,33 +22,104 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const heroScenes = [
-  {
-    image: "https://source.unsplash.com/1600x900/?open-pit-mine,industrial",
-    label: { en: "Mining", es: "Minería" },
-    title: { en: "Mining operations and heavy-duty field power", es: "Minas y energía para operación pesada" },
-  },
-  {
-    image: "https://source.unsplash.com/1600x900/?electrical-substation,power-grid",
-    label: { en: "Substations", es: "Subestaciones" },
-    title: { en: "Substations and critical power distribution", es: "Subestaciones y distribución crítica" },
-  },
-  {
-    image: "https://source.unsplash.com/1600x900/?control-panel,industrial-automation",
-    label: { en: "Control Panels", es: "Tableros de control" },
-    title: { en: "Control boards, integration, and industrial automation", es: "Tableros, integración y automatización industrial" },
-  },
-  {
-    image: "https://source.unsplash.com/1600x900/?instrumentation,industrial-control-room",
-    label: { en: "Instrumentation", es: "Instrumentación avanzada" },
-    title: { en: "Advanced instrumentation and process visibility", es: "Instrumentación avanzada y visibilidad de proceso" },
-  },
-  {
-    image: "https://source.unsplash.com/1600x900/?electrical-testing,engineering",
-    label: { en: "Electrical Testing", es: "Pruebas eléctricas" },
-    title: { en: "Testing, diagnostics, and analytical validation", es: "Pruebas, diagnóstico y validación analítica" },
-  },
-];
+const sectionBackgrounds = {
+  hero: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?mine,industrial",
+      label: { en: "Mining", es: "Minería" },
+      title: { en: "Mining operations and heavy-duty field power", es: "Minas y energía para operación pesada" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?electrical-substation,power",
+      label: { en: "Substations", es: "Subestaciones" },
+      title: { en: "Substations and critical power distribution", es: "Subestaciones y distribución crítica" },
+    },
+  ],
+  about: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-team,engineering",
+      label: { en: "Field Engineering", es: "Ingeniería en campo" },
+      title: { en: "Engineering teams focused on industrial continuity", es: "Equipos enfocados en continuidad industrial" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-maintenance,electrical",
+      label: { en: "Maintenance", es: "Mantenimiento" },
+      title: { en: "Technical response where the operation cannot stop", es: "Respuesta técnica donde la operación no se detiene" },
+    },
+  ],
+  capabilities: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?control-panel,electrical",
+      label: { en: "Control Panels", es: "Tableros de control" },
+      title: { en: "Industrial panels built for distribution and protection", es: "Tableros para distribución, control y protección" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-automation,panel",
+      label: { en: "Automation", es: "Automatización" },
+      title: { en: "Integration, wiring, and advanced control architecture", es: "Integración, cableado y control avanzado" },
+    },
+  ],
+  sectors: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?mine,quarry",
+      label: { en: "Industrial Sites", es: "Sitios industriales" },
+      title: { en: "Mining, energy, and high-demand industrial facilities", es: "Minería, energía e instalaciones de alta exigencia" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-plant,power",
+      label: { en: "Critical Facilities", es: "Instalaciones críticas" },
+      title: { en: "Electrical infrastructure for demanding operating environments", es: "Infraestructura eléctrica para operación exigente" },
+    },
+  ],
+  strength: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?electrical-testing,technician",
+      label: { en: "Testing", es: "Pruebas" },
+      title: { en: "Testing and diagnostics for real field conditions", es: "Pruebas y diagnóstico en condiciones reales" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?analytics,industrial-dashboard",
+      label: { en: "Analytics", es: "Analítica" },
+      title: { en: "Electrical insight backed by technical analysis", es: "Visibilidad eléctrica respaldada por análisis técnico" },
+    },
+  ],
+  projects: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?electrical-room,industrial",
+      label: { en: "Execution", es: "Ejecución" },
+      title: { en: "Installed systems and delivered field solutions", es: "Sistemas instalados y soluciones entregadas" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?substation,engineering",
+      label: { en: "Power Systems", es: "Sistemas de potencia" },
+      title: { en: "Project experience aligned with critical infrastructure", es: "Experiencia alineada con infraestructura crítica" },
+    },
+  ],
+  contact: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-office,control-room",
+      label: { en: "Coordination", es: "Coordinación" },
+      title: { en: "Commercial follow-up and technical coordination", es: "Seguimiento comercial y coordinación técnica" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?electrical-engineer,plant",
+      label: { en: "Support", es: "Soporte" },
+      title: { en: "Direct contact for industrial electrical requirements", es: "Contacto directo para requerimientos eléctricos" },
+    },
+  ],
+  gallery: [
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?industrial-control,monitoring",
+      label: { en: "Visual Portfolio", es: "Portafolio visual" },
+      title: { en: "Visual references for field work and industrial systems", es: "Referencias visuales de campo y sistemas industriales" },
+    },
+    {
+      image: "https://source.unsplash.com/featured/1600x900/?power-plant,industrial",
+      label: { en: "Service Evidence", es: "Evidencia de servicios" },
+      title: { en: "Portfolio-ready imagery while local assets are pending", es: "Imágenes de muestra mientras llegan activos reales" },
+    },
+  ],
+};
 
 const content = {
   en: {
@@ -314,20 +385,56 @@ export default function App() {
   const [language, setLanguage] = useState("en");
   const [galleryImages, setGalleryImages] = useState([]);
   const [dragActive, setDragActive] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
   const [sceneIndex, setSceneIndex] = useState(0);
   const t = content[language];
   const galleryOnly = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("view") === "gallery";
-  const activeScene = heroScenes[sceneIndex];
+  const activeSectionScenes = sectionBackgrounds[activeSection] || sectionBackgrounds.hero;
+  const activeScene = activeSectionScenes[sceneIndex % activeSectionScenes.length];
 
   useEffect(() => {
-    if (galleryOnly) return undefined;
+    if (galleryOnly) {
+      setActiveSection("gallery");
+      return undefined;
+    }
 
+    const sectionIds = ["hero", "about", "capabilities", "sectors", "strength", "projects", "contact"];
+    const sectionElements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length) {
+          setActiveSection(visibleEntries[0].target.id);
+        }
+      },
+      {
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: "-18% 0px -18% 0px",
+      },
+    );
+
+    sectionElements.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [galleryOnly]);
+
+  useEffect(() => {
+    setSceneIndex(0);
+  }, [activeSection]);
+
+  useEffect(() => {
     const intervalId = window.setInterval(() => {
-      setSceneIndex((current) => (current + 1) % heroScenes.length);
+      setSceneIndex((current) => (current + 1) % activeSectionScenes.length);
     }, 5500);
 
     return () => window.clearInterval(intervalId);
-  }, [galleryOnly]);
+  }, [activeSectionScenes.length]);
 
   const addFiles = (files) => {
     const next = Array.from(files || [])
@@ -344,6 +451,16 @@ export default function App() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#04070b] text-white">
       <div className="fixed inset-0 -z-10 overflow-hidden">
+        <motion.div
+          key={`${activeSection}-${sceneIndex}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `linear-gradient(180deg, rgba(4,7,11,0.34) 0%, rgba(4,7,11,0.72) 56%, rgba(4,7,11,0.96) 100%), url('${activeScene.image}')`,
+          }}
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,144,255,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,128,0,0.14),transparent_26%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.06]" />
       </div>
@@ -479,12 +596,8 @@ export default function App() {
         ) : (
           <>
         <section
+          id="hero"
           className="relative flex min-h-screen items-end overflow-hidden"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(4,7,11,0.12) 0%, rgba(4,7,11,0.64) 52%, rgba(4,7,11,0.96) 100%), url('${activeScene.image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.18),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(251,146,60,0.14),transparent_20%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,6,10,0.5),rgba(3,6,10,0.08),rgba(3,6,10,0.62))]" />
@@ -539,9 +652,9 @@ export default function App() {
               className="grid gap-4 self-end"
             >
               <div className="grid gap-3 sm:grid-cols-2">
-                {heroScenes.map((scene, index) => (
+                {activeSectionScenes.map((scene, index) => (
                   <button
-                    key={scene.label.en}
+                    key={`${activeSection}-${scene.label.en}`}
                     type="button"
                     onClick={() => setSceneIndex(index)}
                     className={`rounded-[1.5rem] border px-4 py-3 text-left backdrop-blur-md transition ${
