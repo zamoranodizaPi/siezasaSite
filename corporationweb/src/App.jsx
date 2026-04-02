@@ -5,6 +5,7 @@ import {
   BadgeCheck,
   Bolt,
   Cable,
+  ChevronUp,
   Factory,
   Gauge,
   HardHat,
@@ -380,6 +381,8 @@ const sectorImages = [
 ];
 const footerIcons = [TowerControl, Factory, Sparkles];
 const aboutIcons = [BadgeCheck, HardHat, ShieldCheck];
+const mapsUrl =
+  "https://www.google.com/maps?q=Blv.%20Enrique%20Carrola%20Antuna%201542%2C%20Col.%2020%20de%20Noviembre%20II%2C%20Durango%20C.P.%2034234&output=embed";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -461,7 +464,7 @@ export default function App() {
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#04070b]/72 backdrop-blur-xl">
         <div className="mx-auto max-w-[92rem] px-6 py-4 lg:px-8 xl:px-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
+            <a href={galleryOnly ? "/" : "#hero"} className="flex items-center gap-4">
               <img
                 src="/branding/logo_dark.png"
                 alt="SIEZA"
@@ -471,7 +474,7 @@ export default function App() {
                 <p className="text-[11px] uppercase tracking-[0.32em] text-slate-400">{t.brandTag}</p>
                 <div className="mt-1 text-lg font-semibold tracking-[0.24em] text-white">SIEZA</div>
               </div>
-            </div>
+            </a>
 
             {!galleryOnly && (
               <nav className="hidden items-center gap-8 md:flex">
@@ -862,7 +865,14 @@ export default function App() {
                 </p>
                 <p className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 text-sky-300" />
-                  Blv. Enrique Carrola Antuna 1542, Col. 20 de Noviembre II, Durango C.P. 34234
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition hover:text-white"
+                  >
+                    Blv. Enrique Carrola Antuna 1542, Col. 20 de Noviembre II, Durango C.P. 34234
+                  </a>
                 </p>
                 <p className="flex items-start gap-3">
                   <ArrowRight className="mt-0.5 h-4 w-4 text-sky-300" />
@@ -895,6 +905,16 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {!galleryOnly && (
+        <a
+          href="#hero"
+          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-sky-300/30 bg-[#071019]/88 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-sky-200 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:bg-sky-400/16"
+        >
+          <ChevronUp className="h-4 w-4" />
+          Top
+        </a>
+      )}
       </div>
     </div>
   );
