@@ -25,9 +25,9 @@ const fadeUp = {
 const sectionBackgrounds = {
   hero: [
     {
-      image: "/hero/hero-mining.jpg",
-      label: { en: "Mining", es: "Minería" },
-      title: { en: "Mining operations and heavy-duty field power", es: "Minas y energía para operación pesada" },
+      image: "/hero/hero-towers.jpg",
+      label: { en: "Power Lines", es: "Torres eléctricas" },
+      title: { en: "Transmission infrastructure and industrial power corridors", es: "Infraestructura de transmisión y corredores eléctricos" },
     },
     {
       image: "/hero/hero-substation.jpg",
@@ -37,84 +37,84 @@ const sectionBackgrounds = {
   ],
   about: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/renewable-wind-sunset.jpg",
       label: { en: "Field Engineering", es: "Ingeniería en campo" },
       title: { en: "Engineering teams focused on industrial continuity", es: "Equipos enfocados en continuidad industrial" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/renewable-solar-sunset.jpg",
       label: { en: "Maintenance", es: "Mantenimiento" },
       title: { en: "Technical response where the operation cannot stop", es: "Respuesta técnica donde la operación no se detiene" },
     },
   ],
   capabilities: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/capabilities-panel.jpg",
       label: { en: "Control Panels", es: "Tableros de control" },
       title: { en: "Industrial panels built for distribution and protection", es: "Tableros para distribución, control y protección" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/capabilities-switchgear.jpg",
       label: { en: "Automation", es: "Automatización" },
       title: { en: "Integration, wiring, and advanced control architecture", es: "Integración, cableado y control avanzado" },
     },
   ],
   sectors: [
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/renewable-wind-sunset.jpg",
       label: { en: "Industrial Sites", es: "Sitios industriales" },
       title: { en: "Mining, energy, and high-demand industrial facilities", es: "Minería, energía e instalaciones de alta exigencia" },
     },
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/efficiency-power-sunset.jpg",
       label: { en: "Critical Facilities", es: "Instalaciones críticas" },
       title: { en: "Electrical infrastructure for demanding operating environments", es: "Infraestructura eléctrica para operación exigente" },
     },
   ],
   strength: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/renewable-solar-sunset.jpg",
       label: { en: "Testing", es: "Pruebas" },
       title: { en: "Testing and diagnostics for real field conditions", es: "Pruebas y diagnóstico en condiciones reales" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/efficiency-power-sunset.jpg",
       label: { en: "Analytics", es: "Analítica" },
       title: { en: "Electrical insight backed by technical analysis", es: "Visibilidad eléctrica respaldada por análisis técnico" },
     },
   ],
   projects: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/efficiency-power-sunset.jpg",
       label: { en: "Execution", es: "Ejecución" },
       title: { en: "Installed systems and delivered field solutions", es: "Sistemas instalados y soluciones entregadas" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/hero-substation.jpg",
       label: { en: "Power Systems", es: "Sistemas de potencia" },
       title: { en: "Project experience aligned with critical infrastructure", es: "Experiencia alineada con infraestructura crítica" },
     },
   ],
   contact: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/renewable-wind-sunset.jpg",
       label: { en: "Coordination", es: "Coordinación" },
       title: { en: "Commercial follow-up and technical coordination", es: "Seguimiento comercial y coordinación técnica" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/renewable-solar-sunset.jpg",
       label: { en: "Support", es: "Soporte" },
       title: { en: "Direct contact for industrial electrical requirements", es: "Contacto directo para requerimientos eléctricos" },
     },
   ],
   gallery: [
     {
-      image: "/hero/hero-substation.jpg",
+      image: "/hero/renewable-solar-sunset.jpg",
       label: { en: "Visual Portfolio", es: "Portafolio visual" },
       title: { en: "Visual references for field work and industrial systems", es: "Referencias visuales de campo y sistemas industriales" },
     },
     {
-      image: "/hero/hero-mining.jpg",
+      image: "/hero/renewable-wind-sunset.jpg",
       label: { en: "Service Evidence", es: "Evidencia de servicios" },
       title: { en: "Portfolio-ready imagery while local assets are pending", es: "Imágenes de muestra mientras llegan activos reales" },
     },
