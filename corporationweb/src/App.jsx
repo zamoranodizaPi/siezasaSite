@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -22,15 +22,43 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+const heroScenes = [
+  {
+    image: "https://source.unsplash.com/1600x900/?open-pit-mine,industrial",
+    label: { en: "Mining", es: "Minería" },
+    title: { en: "Mining operations and heavy-duty field power", es: "Minas y energía para operación pesada" },
+  },
+  {
+    image: "https://source.unsplash.com/1600x900/?electrical-substation,power-grid",
+    label: { en: "Substations", es: "Subestaciones" },
+    title: { en: "Substations and critical power distribution", es: "Subestaciones y distribución crítica" },
+  },
+  {
+    image: "https://source.unsplash.com/1600x900/?control-panel,industrial-automation",
+    label: { en: "Control Panels", es: "Tableros de control" },
+    title: { en: "Control boards, integration, and industrial automation", es: "Tableros, integración y automatización industrial" },
+  },
+  {
+    image: "https://source.unsplash.com/1600x900/?instrumentation,industrial-control-room",
+    label: { en: "Instrumentation", es: "Instrumentación avanzada" },
+    title: { en: "Advanced instrumentation and process visibility", es: "Instrumentación avanzada y visibilidad de proceso" },
+  },
+  {
+    image: "https://source.unsplash.com/1600x900/?electrical-testing,engineering",
+    label: { en: "Electrical Testing", es: "Pruebas eléctricas" },
+    title: { en: "Testing, diagnostics, and analytical validation", es: "Pruebas, diagnóstico y validación analítica" },
+  },
+];
+
 const content = {
   en: {
     brandTag: "Electrical Engineering",
     nav: ["About", "Capabilities", "Sectors", "Why SIEZA", "Projects", "Gallery", "Contact"],
     quote: "Request a Quote",
-    badge: "Heavy Industry & Power Systems",
+    badge: "Integrated Engineering Solutions for Critical Industry",
     heroTitle: "Industrial Electrical Infrastructure Built for Reliability",
     heroText:
-      "High-quality electrical solutions for industrial infrastructure, built around precision engineering, uptime, and dependable field execution.",
+      "Integrated solutions in electrical panels, maintenance, spare parts, and installations for industry.",
     contactUs: "Contact Us",
     viewExperience: "View Experience",
     highlights: [
@@ -151,10 +179,10 @@ const content = {
     brandTag: "Ingeniería Eléctrica",
     nav: ["Nosotros", "Capacidades", "Sectores", "Por qué SIEZA", "Proyectos", "Galería", "Contacto"],
     quote: "Solicitar cotización",
-    badge: "Industria pesada y sistemas de potencia",
+    badge: "Soluciones integrales de ingeniería para la industria crítica",
     heroTitle: "Infraestructura eléctrica industrial construida para la confiabilidad",
     heroText:
-      "Soluciones eléctricas de alta calidad para infraestructura industrial, desarrolladas con precisión, continuidad operativa y experiencia técnica en campo.",
+      "Soluciones integrales en tableros eléctricos, mantenimiento, refacciones e instalaciones para la industria.",
     contactUs: "Contáctanos",
     viewExperience: "Ver experiencia",
     highlights: [
@@ -286,8 +314,20 @@ export default function App() {
   const [language, setLanguage] = useState("en");
   const [galleryImages, setGalleryImages] = useState([]);
   const [dragActive, setDragActive] = useState(false);
+  const [sceneIndex, setSceneIndex] = useState(0);
   const t = content[language];
   const galleryOnly = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("view") === "gallery";
+  const activeScene = heroScenes[sceneIndex];
+
+  useEffect(() => {
+    if (galleryOnly) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setSceneIndex((current) => (current + 1) % heroScenes.length);
+    }, 5500);
+
+    return () => window.clearInterval(intervalId);
+  }, [galleryOnly]);
 
   const addFiles = (files) => {
     const next = Array.from(files || [])
@@ -309,7 +349,7 @@ export default function App() {
       </div>
 
       <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#04070b]/72 backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
+        <div className="mx-auto max-w-[92rem] px-6 py-4 lg:px-8 xl:px-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <img
@@ -370,7 +410,7 @@ export default function App() {
 
       <main>
         {galleryOnly ? (
-          <section id="gallery" className="mx-auto max-w-7xl px-6 pb-24 pt-44 lg:px-8">
+          <section id="gallery" className="mx-auto max-w-[92rem] px-6 pb-24 pt-44 lg:px-8 xl:px-10">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">{t.galleryLabel}</h1>
             </motion.div>
@@ -441,14 +481,14 @@ export default function App() {
         <section
           className="relative flex min-h-screen items-end overflow-hidden"
           style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(4,7,11,0.16) 0%, rgba(4,7,11,0.66) 52%, rgba(4,7,11,0.96) 100%), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1900&q=80')",
+            backgroundImage: `linear-gradient(180deg, rgba(4,7,11,0.12) 0%, rgba(4,7,11,0.64) 52%, rgba(4,7,11,0.96) 100%), url('${activeScene.image}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.18),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(251,146,60,0.14),transparent_20%)]" />
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-36 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pb-24">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,6,10,0.5),rgba(3,6,10,0.08),rgba(3,6,10,0.62))]" />
+          <div className="relative mx-auto grid max-w-[92rem] gap-12 px-6 pb-20 pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pb-24 xl:px-10">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }}>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.28em] text-slate-300">
                 <ShieldCheck className="h-4 w-4 text-sky-300" />
@@ -459,7 +499,20 @@ export default function App() {
                 {t.heroTitle}
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">{t.heroText}</p>
+              <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-300 md:text-xl">{t.heroText}</p>
+
+              <motion.div
+                key={`${language}-${sceneIndex}`}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55 }}
+                className="mt-8 inline-flex max-w-fit flex-col gap-2 rounded-[1.7rem] border border-white/12 bg-black/35 px-5 py-4 backdrop-blur-md"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sky-300">
+                  {activeScene.label[language]}
+                </p>
+                <p className="text-sm leading-6 text-slate-200">{activeScene.title[language]}</p>
+              </motion.div>
 
               <div className="mt-10 flex flex-wrap gap-4">
                 <a
@@ -485,6 +538,25 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="grid gap-4 self-end"
             >
+              <div className="grid gap-3 sm:grid-cols-2">
+                {heroScenes.map((scene, index) => (
+                  <button
+                    key={scene.label.en}
+                    type="button"
+                    onClick={() => setSceneIndex(index)}
+                    className={`rounded-[1.5rem] border px-4 py-3 text-left backdrop-blur-md transition ${
+                      index === sceneIndex
+                        ? "border-sky-300/60 bg-sky-400/16 shadow-[0_0_36px_rgba(56,189,248,0.16)]"
+                        : "border-white/10 bg-black/30 hover:border-white/25 hover:bg-black/40"
+                    }`}
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-200">
+                      {scene.label[language]}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-slate-200">{scene.title[language]}</p>
+                  </button>
+                ))}
+              </div>
               {t.highlights.map(([title, text]) => (
                 <div key={title} className="rounded-[1.8rem] border border-white/10 bg-black/35 p-5 backdrop-blur-md">
                   <p className="text-sm font-semibold text-white">{title}</p>
@@ -495,12 +567,12 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="about" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.6 }}>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">{t.aboutLabel}</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{t.aboutTitle}</h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{t.aboutText}</p>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.aboutText}</p>
             </motion.div>
 
             <motion.div
@@ -528,7 +600,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="capabilities" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="capabilities" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">{t.capabilitiesLabel}</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{t.capabilitiesTitle}</h2>
@@ -558,7 +630,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="sectors" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="sectors" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">{t.sectorsLabel}</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{t.sectorsTitle}</h2>
@@ -590,12 +662,12 @@ export default function App() {
           </div>
         </section>
 
-        <section id="strength" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="strength" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.6 }}>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">{t.strengthLabel}</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{t.strengthTitle}</h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{t.strengthText}</p>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.strengthText}</p>
               <div className="mt-8 space-y-4">
                 {t.whyPoints.map((point) => (
                   <div key={point} className="flex items-start gap-3 text-sm leading-7 text-slate-300">
@@ -624,7 +696,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="projects" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="projects" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.6 }}>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">{t.projectsLabel}</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{t.projectsTitle}</h2>
@@ -649,7 +721,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="contact" className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <section id="contact" className="mx-auto max-w-[92rem] px-6 py-24 lg:px-8 xl:px-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -660,7 +732,7 @@ export default function App() {
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.16),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(251,146,60,0.14),transparent_22%)]" />
             <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
+              <div className="max-w-4xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">{t.ctaLabel}</p>
                 <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">{t.ctaTitle}</h2>
                 <p className="mt-5 text-base leading-8 text-slate-300">{t.ctaText}</p>
@@ -683,7 +755,7 @@ export default function App() {
       </main>
 
       <footer className="border-t border-white/10 bg-black/30">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-[1fr_0.9fr] lg:px-8">
+        <div className="mx-auto grid max-w-[92rem] gap-8 px-6 py-14 lg:grid-cols-[1fr_0.9fr] lg:px-8 xl:px-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">SIEZA</p>
             <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white">{t.footerTitle}</h3>
@@ -703,7 +775,7 @@ export default function App() {
                 </p>
                 <p className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 text-sky-300" />
-                  Los Pinos 8-A, Col. Francisco I. Madero, Cuautla, Mexico, 62744
+                  Blv. Enrique Carrola Antuna 1542, Col. 20 de Noviembre II, Durango C.P. 34234
                 </p>
                 <p className="flex items-start gap-3">
                   <ArrowRight className="mt-0.5 h-4 w-4 text-sky-300" />
