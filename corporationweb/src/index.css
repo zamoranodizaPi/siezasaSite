@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -13,10 +13,66 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: #070b10;
+  background: #f4f8fc;
   font-family: theme("fontFamily.sans");
 }
 
 #root {
   min-height: 100vh;
+}
+
+body[data-theme="dark"] {
+  color-scheme: dark;
+  background: #070b10;
+}
+
+body[data-theme="light"] {
+  color-scheme: light;
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.08), transparent 24%),
+    #f4f8fc;
+}
+
+body[data-theme="light"] .text-white {
+  color: #0f172a !important;
+}
+
+body[data-theme="light"] .text-slate-300 {
+  color: #334155 !important;
+}
+
+body[data-theme="light"] .text-slate-400 {
+  color: #475569 !important;
+}
+
+body[data-theme="light"] .border-white\/10,
+body[data-theme="light"] .border-white\/12,
+body[data-theme="light"] .border-white\/15,
+body[data-theme="light"] .border-white\/8 {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+body[data-theme="light"] .bg-white\/5,
+body[data-theme="light"] .bg-white\/6,
+body[data-theme="light"] .bg-white\/10,
+body[data-theme="light"] .bg-white\/\[0\.03\],
+body[data-theme="light"] .bg-white\/\[0\.04\] {
+  background-color: rgba(255, 255, 255, 0.66) !important;
+}
+
+body[data-theme="light"] .bg-black\/30,
+body[data-theme="light"] .bg-black\/35,
+body[data-theme="light"] .bg-black\/40,
+body[data-theme="light"] .bg-black\/55 {
+  background-color: rgba(241, 245, 249, 0.72) !important;
+}
+
+body[data-theme="light"] .bg-\[\#071019\]\/88,
+body[data-theme="light"] .bg-\[\#04070b\]\/72 {
+  background-color: rgba(248, 251, 253, 0.82) !important;
+}
+
+body[data-theme="light"] .hover\:text-white:hover {
+  color: #020617 !important;
 }

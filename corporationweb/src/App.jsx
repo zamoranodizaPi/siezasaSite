@@ -389,6 +389,7 @@ const mapsUrl =
 const galleryStorageKey = "sieza-gallery-images";
 
 export default function App() {
+  const [theme, setTheme] = useState("light");
   const [language, setLanguage] = useState("es");
   const [galleryImages, setGalleryImages] = useState([]);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -398,6 +399,7 @@ export default function App() {
   const galleryOnly = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("view") === "gallery";
   const activeSectionScenes = sectionBackgrounds[activeSection] || sectionBackgrounds.hero;
   const activeScene = activeSectionScenes[sceneIndex % activeSectionScenes.length];
+  const isDark = theme === "dark";
 
   useEffect(() => {
     if (galleryOnly) {
@@ -434,6 +436,11 @@ export default function App() {
   useEffect(() => {
     setSceneIndex(0);
   }, [activeSection]);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.body.dataset.theme = theme;
+  }, [theme]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -505,7 +512,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden text-white">
+    <div className={`relative min-h-screen overflow-x-hidden ${isDark ? "text-white" : "text-slate-950"}`}>
       <div className="fixed inset-0 z-0 overflow-hidden">
         <motion.div
           key={`${activeSection}-${sceneIndex}`}
@@ -514,7 +521,11 @@ export default function App() {
           transition={{ duration: 0.9, ease: "easeOut" }}
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(4,7,11,0.34) 0%, rgba(4,7,11,0.72) 56%, rgba(4,7,11,0.96) 100%), url('${activeScene.image}')`,
+            backgroundImage: `linear-gradient(180deg, ${
+              isDark
+                ? "rgba(4,7,11,0.34) 0%, rgba(4,7,11,0.72) 56%, rgba(4,7,11,0.96) 100%"
+                : "rgba(244,248,252,0.18) 0%, rgba(244,248,252,0.58) 50%, rgba(244,248,252,0.92) 100%"
+            }), url('${activeScene.image}')`,
           }}
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,144,255,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,128,0,0.14),transparent_26%)]" />
@@ -522,12 +533,12 @@ export default function App() {
       </div>
 
       <div className="relative z-10">
-      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#04070b]/72 backdrop-blur-xl">
+      <header className={`fixed top-0 z-50 w-full border-b backdrop-blur-xl ${isDark ? "border-white/10 bg-[#04070b]/72" : "border-slate-900/10 bg-[rgba(247,250,252,0.72)]"}`}>
         <div className="mx-auto max-w-[92rem] px-6 py-4 lg:px-8 xl:px-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <a href={galleryOnly ? "/" : "#hero"} className="flex items-center gap-4">
               <img
-                src="/branding/logo_dark.png"
+                src={isDark ? "/branding/logo_dark.png" : "/branding/logo_light.png"}
                 alt="SIEZA"
                 className="h-12 w-auto object-contain"
               />
@@ -554,7 +565,7 @@ export default function App() {
             )}
           </div>
 
-          <div className="mt-3 flex items-center justify-end gap-2 border-t border-white/8 pt-3">
+          <div className={`mt-3 flex items-center justify-end gap-2 border-t pt-3 ${isDark ? "border-white/8" : "border-slate-900/10"}`}>
             <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-0.5 text-[10px]">
               <button
                 type="button"
@@ -569,6 +580,22 @@ export default function App() {
                 className={`rounded-full px-2.5 py-1 transition ${language === "es" ? "bg-white text-slate-950" : "text-slate-300"}`}
               >
                 ES
+              </button>
+            </div>
+            <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-0.5 text-[10px]">
+              <button
+                type="button"
+                onClick={() => setTheme("light")}
+                className={`rounded-full px-2.5 py-1 transition ${theme === "light" ? "bg-white text-slate-950" : "text-slate-300"}`}
+              >
+                Light
+              </button>
+              <button
+                type="button"
+                onClick={() => setTheme("dark")}
+                className={`rounded-full px-2.5 py-1 transition ${theme === "dark" ? "bg-white text-slate-950" : "text-slate-300"}`}
+              >
+                Dark
               </button>
             </div>
             <a
@@ -921,7 +948,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="border-t border-white/10 bg-black/30">
+      <footer className={`border-t ${isDark ? "border-white/10 bg-black/30" : "border-slate-900/10 bg-[rgba(248,251,253,0.55)]"}`}>
         <div className="mx-auto grid max-w-[92rem] gap-8 px-6 py-14 lg:grid-cols-[1fr_0.9fr] lg:px-8 xl:px-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">SIEZA</p>
@@ -986,7 +1013,7 @@ export default function App() {
       {!galleryOnly && (
         <a
           href="#hero"
-          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-sky-300/30 bg-[#071019]/88 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-sky-200 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:bg-sky-400/16"
+          className={`fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-sky-300/30 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-sky-200 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:bg-sky-400/16 ${isDark ? "bg-[#071019]/88" : "bg-[rgba(248,251,253,0.88)] text-sky-700"}`}
         >
           <ChevronUp className="h-4 w-4" />
           Top
