@@ -5,6 +5,8 @@ import {
   BadgeCheck,
   Bolt,
   Cable,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   Factory,
   Gauge,
@@ -12,6 +14,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  Plus,
   ShieldCheck,
   Sparkles,
   TowerControl,
@@ -387,7 +390,7 @@ const mapsUrl =
 export default function App() {
   const [language, setLanguage] = useState("en");
   const [galleryImages, setGalleryImages] = useState([]);
-  const [dragActive, setDragActive] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
   const [sceneIndex, setSceneIndex] = useState(0);
   const t = content[language];
@@ -441,6 +444,20 @@ export default function App() {
       }));
     if (!next.length) return;
     setGalleryImages((current) => [...next, ...current.filter((item) => !next.some((n) => n.id === item.id))]);
+  };
+
+  const showPreviousGalleryImage = () => {
+    setGalleryIndex((current) => {
+      if (!galleryImages.length) return 0;
+      return current === 0 ? galleryImages.length - 1 : current - 1;
+    });
+  };
+
+  const showNextGalleryImage = () => {
+    setGalleryIndex((current) => {
+      if (!galleryImages.length) return 0;
+      return (current + 1) % galleryImages.length;
+    });
   };
 
   return (
@@ -524,8 +541,24 @@ export default function App() {
       <main>
         {galleryOnly ? (
           <section id="gallery" className="mx-auto max-w-[92rem] px-6 pb-24 pt-44 lg:px-8 xl:px-10">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              className="flex items-center justify-between gap-4"
+            >
               <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">{t.galleryLabel}</h1>
+              <label className="inline-flex cursor-pointer items-center justify-center rounded-full border border-white/12 bg-white/6 p-3 text-white transition hover:border-sky-300/40 hover:bg-sky-400/12">
+                <Plus className="h-5 w-5" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(event) => addFiles(event.target.files)}
+                />
+              </label>
             </motion.div>
 
             <motion.div
@@ -535,55 +568,55 @@ export default function App() {
               transition={{ duration: 0.6, delay: 0.08 }}
               className="mt-12"
             >
-              <label
-                className={`block cursor-pointer rounded-[2rem] border border-dashed p-10 text-center transition ${
-                  dragActive
-                    ? "border-sky-300 bg-sky-400/10 shadow-[0_0_40px_rgba(56,189,248,0.15)]"
-                    : "border-white/15 bg-white/[0.03] hover:border-white/30 hover:bg-white/[0.05]"
-                }`}
-                onDragEnter={(event) => {
-                  event.preventDefault();
-                  setDragActive(true);
-                }}
-                onDragOver={(event) => {
-                  event.preventDefault();
-                  setDragActive(true);
-                }}
-                onDragLeave={(event) => {
-                  event.preventDefault();
-                  setDragActive(false);
-                }}
-                onDrop={(event) => {
-                  event.preventDefault();
-                  setDragActive(false);
-                  addFiles(event.dataTransfer.files);
-                }}
-              >
-                <div className="mx-auto max-w-xl">
-                  <div className="text-xl font-semibold text-white">{t.galleryDrop}</div>
-                  <div className="mt-3 text-sm uppercase tracking-[0.28em] text-sky-300">{t.galleryBrowse}</div>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">{t.galleryHint}</p>
-                </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  className="hidden"
-                  onChange={(event) => addFiles(event.target.files)}
-                />
-              </label>
-
               {galleryImages.length ? (
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                  {galleryImages.map((image) => (
-                    <div key={image.id} className="overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/[0.03]">
-                      <img src={image.url} alt={image.name} className="h-72 w-full object-cover" />
-                      <div className="border-t border-white/10 px-5 py-4 text-sm text-slate-300">{image.name}</div>
+                <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-white/[0.04]">
+                  <div className="relative aspect-[16/9] w-full">
+                    {galleryImages.map((image, index) => (
+                      <img
+                        key={image.id}
+                        src={image.url}
+                        alt=""
+                        className={`absolute inset-0 h-full w-full object-cover transition duration-500 ${
+                          index === galleryIndex ? "opacity-100" : "pointer-events-none opacity-0"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  {galleryImages.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={showPreviousGalleryImage}
+                        className="absolute left-4 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white backdrop-blur-md transition hover:bg-black/55"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={showNextGalleryImage}
+                        className="absolute right-4 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white backdrop-blur-md transition hover:bg-black/55"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                    </>
+                  )}
+                  {galleryImages.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full border border-white/12 bg-black/35 px-3 py-2 backdrop-blur-md">
+                      {galleryImages.map((image, index) => (
+                        <button
+                          key={`${image.id}-dot`}
+                          type="button"
+                          onClick={() => setGalleryIndex(index)}
+                          className={`h-2.5 w-2.5 rounded-full transition ${
+                            index === galleryIndex ? "bg-white" : "bg-white/35 hover:bg-white/60"
+                          }`}
+                        />
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
               ) : (
-                <div className="mt-8 rounded-[1.6rem] border border-white/10 bg-white/[0.03] px-6 py-5 text-sm text-slate-400">
+                <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-16 text-center text-sm text-slate-400">
                   {t.galleryEmpty}
                 </div>
               )}
