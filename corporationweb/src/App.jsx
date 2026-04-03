@@ -387,7 +387,7 @@ const sectorImages = [
 const footerIcons = [TowerControl, Factory, Sparkles];
 const aboutIcons = [BadgeCheck, HardHat, ShieldCheck];
 const mapsUrl =
-  "https://www.google.com/maps?q=Blv.%20Enrique%20Carrola%20Antuna%201542%2C%20Col.%2020%20de%20Noviembre%20II%2C%20Durango%20C.P.%2034234&output=embed";
+  "https://www.google.com/maps/search/?api=1&query=Blv.%20Enrique%20Carrola%20Antuna%201542%2C%20Col.%2020%20de%20Noviembre%20II%2C%20Durango%20C.P.%2034234";
 const galleryStorageKey = "sieza-gallery-images";
 
 export default function App() {
