@@ -389,7 +389,7 @@ const mapsUrl =
 const galleryStorageKey = "sieza-gallery-images";
 
 export default function App() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("es");
   const [galleryImages, setGalleryImages] = useState([]);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
