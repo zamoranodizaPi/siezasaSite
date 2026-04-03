@@ -386,6 +386,7 @@ const footerIcons = [TowerControl, Factory, Sparkles];
 const aboutIcons = [BadgeCheck, HardHat, ShieldCheck];
 const mapsUrl =
   "https://www.google.com/maps?q=Blv.%20Enrique%20Carrola%20Antuna%201542%2C%20Col.%2020%20de%20Noviembre%20II%2C%20Durango%20C.P.%2034234&output=embed";
+const galleryStorageKey = "sieza-gallery-images";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -434,16 +435,59 @@ export default function App() {
     setSceneIndex(0);
   }, [activeSection]);
 
-  const addFiles = (files) => {
-    const next = Array.from(files || [])
-      .filter((file) => file.type.startsWith("image/"))
-      .map((file) => ({
-        id: `${file.name}-${file.size}-${file.lastModified}`,
-        name: file.name,
-        url: URL.createObjectURL(file),
-      }));
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const storedImages = window.localStorage.getItem(galleryStorageKey);
+    if (!storedImages) return;
+
+    try {
+      const parsedImages = JSON.parse(storedImages);
+      if (Array.isArray(parsedImages)) {
+        setGalleryImages(parsedImages);
+      }
+    } catch {
+      window.localStorage.removeItem(galleryStorageKey);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(galleryStorageKey, JSON.stringify(galleryImages));
+  }, [galleryImages]);
+
+  useEffect(() => {
+    setGalleryIndex((current) => {
+      if (!galleryImages.length) return 0;
+      return current >= galleryImages.length ? 0 : current;
+    });
+  }, [galleryImages]);
+
+  const readFileAsDataUrl = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+
+  const addFiles = async (files) => {
+    const validFiles = Array.from(files || []).filter((file) => file.type.startsWith("image/"));
+    if (!validFiles.length) return;
+
+    const next = (
+      await Promise.all(
+        validFiles.map(async (file) => ({
+          id: `${file.name}-${file.size}-${file.lastModified}`,
+          name: file.name,
+          url: await readFileAsDataUrl(file),
+        })),
+      )
+    ).filter(Boolean);
+
     if (!next.length) return;
     setGalleryImages((current) => [...next, ...current.filter((item) => !next.some((n) => n.id === item.id))]);
+    setGalleryIndex(0);
   };
 
   const showPreviousGalleryImage = () => {
