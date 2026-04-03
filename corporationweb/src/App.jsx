@@ -13,10 +13,12 @@ import {
   HardHat,
   Mail,
   MapPin,
+  Moon,
   Phone,
   Plus,
   ShieldCheck,
   Sparkles,
+  SunMedium,
   TowerControl,
   Wrench,
 } from "lucide-react";
@@ -389,7 +391,7 @@ const mapsUrl =
 const galleryStorageKey = "sieza-gallery-images";
 
 export default function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const [language, setLanguage] = useState("es");
   const [galleryImages, setGalleryImages] = useState([]);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -582,22 +584,14 @@ export default function App() {
                 ES
               </button>
             </div>
-            <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-0.5 text-[10px]">
-              <button
-                type="button"
-                onClick={() => setTheme("light")}
-                className={`rounded-full px-2.5 py-1 transition ${theme === "light" ? "bg-white text-slate-950" : "text-slate-300"}`}
-              >
-                Light
-              </button>
-              <button
-                type="button"
-                onClick={() => setTheme("dark")}
-                className={`rounded-full px-2.5 py-1 transition ${theme === "dark" ? "bg-white text-slate-950" : "text-slate-300"}`}
-              >
-                Dark
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-300 transition hover:bg-white/10"
+              aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            >
+              {isDark ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <a
               href={galleryOnly ? "/" : "#contact"}
               className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/30 bg-sky-400/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200 transition hover:bg-sky-400/16"
@@ -714,23 +708,14 @@ export default function App() {
 
               <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-300 md:text-xl">{t.heroText}</p>
 
-              <motion.div
-                key={`${language}-${sceneIndex}`}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
-                className="mt-8 inline-flex max-w-fit flex-col gap-2 rounded-[1.7rem] border border-white/12 bg-black/35 px-5 py-4 backdrop-blur-md"
-              >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sky-300">
-                  {activeScene.label[language]}
-                </p>
-                <p className="text-sm leading-6 text-slate-200">{activeScene.title[language]}</p>
-              </motion.div>
-
               <div className="mt-10 flex flex-wrap gap-4">
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:translate-y-[-1px]"
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition hover:translate-y-[-1px] ${
+                    isDark
+                      ? "bg-gradient-to-r from-sky-400 to-cyan-300 text-slate-950"
+                      : "border border-sky-300/30 bg-sky-400/10 text-sky-800 hover:bg-sky-400/16"
+                  }`}
                 >
                   {t.contactUs}
                   <ArrowRight className="h-4 w-4" />
@@ -757,6 +742,16 @@ export default function App() {
                   <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
                 </div>
               ))}
+              <motion.div
+                key={`${language}-${sceneIndex}`}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55 }}
+                className="rounded-[1.8rem] border border-white/10 bg-black/35 p-5 backdrop-blur-md"
+              >
+                <p className="text-sm font-semibold text-white">{activeScene.label[language]}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">{activeScene.title[language]}</p>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -847,7 +842,7 @@ export default function App() {
                     backgroundImage: `linear-gradient(180deg, rgba(4,8,14,0.10) 0%, rgba(4,8,14,0.68) 60%, rgba(4,8,14,0.96) 100%), url('${sectorImages[index]}')`,
                   }}
                 />
-                <div className="absolute inset-x-0 bottom-0 p-7">
+                <div className="absolute inset-x-0 bottom-0 p-7 on-image-text">
                   <h3 className="text-2xl font-semibold text-white">{sector.title}</h3>
                   <p className="mt-3 max-w-sm text-sm leading-7 text-slate-300">{sector.text}</p>
                 </div>
@@ -935,7 +930,11 @@ export default function App() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="mailto:juan.alvarez@siezasa.com"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:translate-y-[-1px]"
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition hover:translate-y-[-1px] ${
+                    isDark
+                      ? "bg-gradient-to-r from-sky-400 to-cyan-300 text-slate-950"
+                      : "border border-sky-300/30 bg-sky-400/10 text-sky-800 hover:bg-sky-400/16"
+                  }`}
                 >
                   {t.contactUs}
                   <ArrowRight className="h-4 w-4" />
